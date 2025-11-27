@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Analyzer</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Global smooth animation */
+* {
+    transition: 0.3s ease-in-out;
+}
+
+/* Body background */
+body {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar styling */
+nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+/* Navbar brand */
+nav h1 {
+    letter-spacing: 1px;
+}
+
+/* Navbar links hover */
+nav a:hover {
+    color: #4f46e5;
+    transform: translateY(-2px);
+}
+
+/* Buttons */
+button {
+    transition: 0.25s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Main card */
+.card {
+    animation: slideUp 0.7s ease-out;
+    border-radius: 20px;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Slide-up animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 15px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- 🔥 NAVBAR -->
+    <nav class="bg-white shadow-lg py-4">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <h1 class="text-2xl font-bold text-indigo-600">Student Analyzer</h1>
+
+            <div class="space-x-6 text-lg font-semibold">
+                <a href="/" class="hover:text-indigo-600">Home</a>
+                <a href="#" class="hover:text-indigo-600">About</a>
+                <a href="#" class="hover:text-indigo-600">Contact</a>
+            </div>
+
+            <div class="space-x-4">
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                    Login
+                </button>
+                <button class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900">
+                    Signup
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-grow flex items-center justify-center py-10">
+
+        <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg">
+
+            <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">
+                Student Result Analyzer
+            </h2>
+
+            <!-- 🔍 SEARCH FORM -->
+            <form action="/result" method="POST" class="space-y-4">
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Enter Student Name"
+                    required
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                >
+
+                <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg text-lg font-semibold transition">
+                    Get Result
+                </button>
+            </form>
+
+            <!-- ❗ IF STUDENT NOT FOUND -->
+            {% if message %}
+            <p class="mt-4 text-red-600 text-center font-semibold">
+                {{ message }}
+            </p>
+            {% endif %}
+
+            <!-- 📊 RESULT BLOCK -->
+            {% if name %}
+            <div class="mt-6 bg-gray-100 p-5 rounded-lg shadow-inner">
+                <h2 class="text-xl font-bold text-gray-800">Result for: {{ name }}</h2>
+
+                <p class="mt-2"><b>Mark 1:</b> {{ mark1 }}</p>
+                <p><b>Mark 2:</b> {{ mark2 }}</p>
+                <p><b>Mark 3:</b> {{ mark3 }}</p>
+
+                <p class="mt-4 text-lg"><b>Total:</b> {{ total }}</p>
+                <p class="text-lg"><b>Average:</b> {{ avg }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-4 shadow-inner">
+        <p class="text-center text-gray-600 font-semibold">
+            © 2025 Student Analyzer • Designed by Madhav
+        </p>
+    </footer>
+
+</body>
+</html>
